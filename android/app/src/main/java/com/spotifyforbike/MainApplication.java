@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.reactnativeultimateconfig.UltimateConfigModule;
 
+import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,6 +31,9 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+
+          //For react-native-events, which is a dependency of react-native-spotify-remote
+          packages.add(new RNEventEmitterPackage());
           return packages;
         }
 
