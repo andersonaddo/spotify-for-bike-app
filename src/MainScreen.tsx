@@ -1,17 +1,31 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import colors from './Colors';
-import SkipBackwardsButton from './Components/BackwardsSkipButton';
-import SkipForwardButton from './Components/ForwardSkipButton';
-import PausePlayButton from './Components/PausePlayButton';
-import TrackInfo from './Components/TrackInfo';
+import SkipBackwardsButton from './components/BackwardsSkipButton';
+import SkipForwardButton from './components/ForwardSkipButton';
+import PausePlayButton from './components/PausePlayButton';
+import TrackInfo from './components/TrackInfo';
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import FeatherIcon from 'react-native-vector-icons/Feather'
+import { MainScreenNavProps } from './types/navigationTypes';
 
-class MainScreen extends React.PureComponent {
+
+class MainScreen extends React.PureComponent<MainScreenNavProps> {
 
   render(): React.ReactNode {
     return (
       <View style={styles.container}>
-        <View style={styles.header}></View>
+        <View style={styles.header}>
+          <Icon
+            name="spotify"
+            color={colors.spotifyGreen}
+            size={30} />
+          <FeatherIcon
+            name="settings"
+            color={colors.spotifySand}
+            size={30} 
+            onPress = {() => this.props.navigation.navigate("Settings")}/>
+        </View>
 
         <TrackInfo />
 
@@ -34,9 +48,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    height: 30,
+    flexDirection: "row",
+    paddingHorizontal: 8,
+    height: 40,
     borderBottomColor: colors.spotifyGrey,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    justifyContent: 'space-between',
   },
 
   secondaryButtonPanel: {
