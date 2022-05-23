@@ -1,11 +1,11 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, TouchableOpacityBase, View } from 'react-native';
-import colors from './utils/Colors';
-import { SettingsNavProps } from './types/navigationTypes';
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import * as settings from "./utils/AsyncStorageValues"
-import { SpotifyAPIContext } from './SpotifyAPIContext';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import IdleTimerManager from 'react-native-idle-timer';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { SpotifyAPIContext } from './SpotifyAPIContext';
+import { SettingsNavProps } from './types/navigationTypes';
+import * as settings from "./utils/AsyncStorageValues";
+import colors from './utils/Colors';
 
 
 export default class Settings extends React.PureComponent<SettingsNavProps> {
@@ -41,14 +41,14 @@ export default class Settings extends React.PureComponent<SettingsNavProps> {
 
           <TouchableOpacity
             onPress={() => IdleTimerManager.setIdleTimerDisabled(false)}
-            style={styles.sleepButton}
+            style={styles.sleepButtonDisable}
           >
             <Text style={styles.sleepButtonText}>Disable Screen Sleep</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => IdleTimerManager.setIdleTimerDisabled(true)}
-            style={styles.sleepButton}
+            style={styles.sleepButtonEnable}
           >
             <Text style={styles.sleepButtonText}>Enable Screen Sleep</Text>
           </TouchableOpacity>
@@ -59,7 +59,7 @@ export default class Settings extends React.PureComponent<SettingsNavProps> {
           onPress={() => this.props.navigation.navigate("MainScreen")}
           style={styles.backButton}
         >
-          <Text style={styles.buttonTitleStyle}>Back</Text>
+          <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
       </View>
@@ -154,7 +154,7 @@ class AuthButton extends React.PureComponent {
         style={isConnected ? styles.disconnectButton : styles.connectButton}
         onPress={this.toggleAuth}
       >
-        <Text style={styles.buttonTitleStyle}>{isConnected ? "Disconnect" : "Connect"}</Text>
+        <Text style={styles.authButtonTitleStyle}>{isConnected ? "Disconnect" : "Connect"}</Text>
       </TouchableOpacity>
     )
   }
@@ -179,21 +179,19 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
 
-  backButton: {
-    backgroundColor: colors.spotifyGreen,
-    width: 250,
-    borderRadius: 50
+  sleepButtonEnable: {
+    borderColor: colors.blue,
+    borderWidth: 5,
+    width: 140,
+    height: 50,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignContent: "center"
   },
 
-  buttonTitleStyle: {
-    color: "black",
-    fontSize: 24,
-    textAlign: "center"
-  },
-
-  sleepButton: {
+  sleepButtonDisable: {
     backgroundColor: colors.blue,
-    width: 120,
+    width: 140,
     height: 50,
     borderRadius: 50,
     justifyContent: "center",
@@ -202,7 +200,7 @@ const styles = StyleSheet.create({
 
   sleepButtonText: {
     color: colors.spotifySand,
-    fontSize: 19,
+    fontSize: 16,
     textAlign: "center"
   },
 
@@ -213,6 +211,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "80%"
   },
+
+  backButton: {
+    borderColor: colors.spotifyGrey,
+    borderWidth: 5,
+    marginTop: 8,
+    width: 250,
+    borderRadius: 50
+  },
+
+  backButtonText: {
+    color: colors.spotifySand,
+    fontSize: 24,
+    textAlign: "center"
+  },
+
 
   //For SettingsTextInput class
   inputLabel: {
@@ -233,12 +246,18 @@ const styles = StyleSheet.create({
   },
 
   //For AuthButton class
+  authButtonTitleStyle: {
+    color: "black",
+    fontSize: 24,
+    textAlign: "center"
+  },
+
   connectButton: {
     backgroundColor: colors.spotifyGreen,
     width: 250,
-    height: 50,
+    height: 60,
     borderRadius: 50,
-    marginBottom: 16,
+    marginVertical: 16,
     justifyContent: "center",
     alignContent: "center"
   },
@@ -246,9 +265,9 @@ const styles = StyleSheet.create({
   disconnectButton: {
     backgroundColor: colors.errorRed,
     width: 250,
-    height: 50,
+    height: 60,
     borderRadius: 50,
-    marginBottom: 16,
+    marginVertical: 16,
     justifyContent: "center",
     alignContent: "center"
   },

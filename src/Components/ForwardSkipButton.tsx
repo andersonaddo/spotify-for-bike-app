@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
     skipForwardButton: {
         width: "100%",
-        height: "33%",
+        height: "30%",
         alignItems: "center",
         justifyContent: "center"
     },

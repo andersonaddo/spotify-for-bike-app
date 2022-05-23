@@ -2,6 +2,7 @@ const colors = {
     spotifyGreen: "#1DB954",
     spotifyGrey: "#828282",
     spotifySand: "#ecebe8",
+    
     darkGrey: "#181818",
 
     blue: "#3c6fd6",

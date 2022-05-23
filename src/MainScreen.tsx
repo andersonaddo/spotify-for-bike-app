@@ -19,15 +19,17 @@ class MainScreen extends React.PureComponent<MainScreenNavProps> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Icon
-            name="spotify"
-            color={colors.spotifyGreen}
-            size={30} />
-          <FeatherIcon
-            name="settings"
-            color={colors.spotifySand}
-            size={30}
-            onPress={() => this.props.navigation.navigate("Settings")} />
+            <Icon
+              name="spotify"
+              color={colors.spotifyGreen}
+              size={30}
+              style = {styles.headerIcon} />
+            <FeatherIcon
+              name="settings"
+              color={colors.spotifySand}
+              size={30}
+              onPress={() => this.props.navigation.navigate("Settings")}
+              style = {styles.headerIcon} />
         </View>
 
         <ConnectionBanner />
@@ -56,11 +58,15 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    paddingHorizontal: 8,
-    height: 40,
+    height: 45,
     borderBottomColor: colors.spotifyGrey,
     borderBottomWidth: 1,
     justifyContent: 'space-between',
+  },
+
+  headerIcon: {
+    marginHorizontal: 8,
+    marginTop: 8
   },
 
   secondaryButtonPanel: {

@@ -80,8 +80,8 @@ class TrackInfo extends React.PureComponent<{}, TrackInfoState> {
 
 const styles = StyleSheet.create({
     albumCover: {
-        height: 160,
-        width: 160,
+        height: 155,
+        width: 155,
         alignSelf: "center",
         overflow: "hidden",
         borderRadius: 12
