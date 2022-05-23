@@ -1,29 +1,80 @@
 import React from 'react';
 import {
     Image,
-    StyleSheet, Text, TouchableHighlight, View
+    StyleSheet, Text, View
 } from 'react-native';
-import colors from '../Colors';
+import { Track } from 'react-native-spotify-remote';
+import SpotifyWebApi from 'spotify-web-api-node';
+import SpotifyAPIContext from '../SpotifyAPIContext';
+import colors from '../utils/Colors';
 
-class TrackInfo extends React.PureComponent {
+interface TrackInfoState {
+    url: string
+}
+
+class TrackInfo extends React.PureComponent<{}, TrackInfoState> {
+
+    state: TrackInfoState = {
+        url: ""
+    }
+
+    static contextType = SpotifyAPIContext;
+    declare context: React.ContextType<typeof SpotifyAPIContext>
+
+    webApi = new SpotifyWebApi()
+
+    lastTrack: Track | undefined;
 
     render(): React.ReactNode {
+        const isActive = this.context.isConnected == true
+
+        this.fetchArtworkUrl()
+        
         return (
             <View style={{ flex: 1 }}>
                 <Image
-                    source={require("../../media/music_default.png")}
+                    defaultSource={require("../../media/music_default.png")}
+                    source={(!isActive || this.state.url == "") ? require("../../media/music_default.png") : { uri: this.state.url }}
                     style={styles.albumCover}
                     resizeMode="contain"
                 />
 
                 <View style={styles.textPanel}>
-                    <Text style={styles.trackTitle}>Title</Text>
-                    <Text style={styles.trackArtist}>Artist</Text>
-                    <Text style={styles.trackSource}>Extra Info</Text>
+                    <Text style={styles.trackTitle}>{!isActive ? "[Title]" : this.context.playerState?.track.name}</Text>
+                    <Text style={styles.trackArtist}>{!isActive ? "[Artist]" : this.context.playerState?.track.artist.name}</Text>
                 </View>
 
             </View>
         )
+    }
+
+    fetchArtworkUrl = async () => {
+        try {
+            if (!this.context.token) return;
+            const currentTrack = this.context.playerState?.track
+            const albumUri = this.context.playerState?.track.album.uri;
+            
+            if (this.lastTrack == currentTrack)  return;
+
+            if (!albumUri) {
+                this.setState({ url: "" })
+            } else {
+                const split = albumUri.split(":")
+                if (split.length != 3) {
+                    this.setState({ url: "" })
+                } else {
+                    this.webApi.setAccessToken(this.context.token);
+                    const response = await this.webApi.getAlbum(split[2])
+                    const images = response.body.images;
+                    if (images.length > 0) this.setState({ url: images[0].url })
+                    else this.setState({ url: "" })
+                }
+            }
+
+            this.lastTrack = currentTrack;
+        } catch (err) {
+            this.context.onError(err as Error)
+        }
     }
 }
 
