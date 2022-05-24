@@ -8,6 +8,7 @@ import {
     ApiScope, auth, PlayerContext, PlayerState, remote, SpotifyAuth, SpotifyRemoteApi
 } from 'react-native-spotify-remote';
 import { AppState, AppStateStatus, NativeEventSubscription } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 
 /**
  * Options used to dictate how the user authenticates
@@ -156,7 +157,7 @@ class SpotifyContextProvider extends React.Component<{}, ContextProviderState> {
             if (!isConnected) {
                 await remote.connect(accessToken)
                 console.log("Remote connected")
-            }else{
+            } else {
                 console.log("Skipped remote connection")
             }
         } catch (err) {
@@ -175,14 +176,30 @@ class SpotifyContextProvider extends React.Component<{}, ContextProviderState> {
                 this.connectRemoteIfNotConnected(session.accessToken)
                     .then(() => this.setState((state) => ({ ...state, isConnected: true })))
                     .catch(this.onError);
-            }else{
+            } else {
                 console.log("Session non existent (or had no token)")
             }
         });
     }
 
     private onError = (error: Error) => {
-        console.error(error)
+        if (__DEV__) {
+            console.error(error.message)
+        } else {
+            let message = error.message
+            //Some errors returned by the api have nested messages
+            try{
+                const parsedError = JSON.parse(message)
+                const nestedMessage = parsedError?.message
+                if (nestedMessage) message = nestedMessage
+            }catch(err){}
+            
+            Snackbar.show({
+                text: message,
+                duration: Snackbar.LENGTH_SHORT,
+            });
+        }
+
         this.setState((state) => ({ ...state, error }))
     }
 

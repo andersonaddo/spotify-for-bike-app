@@ -49,7 +49,7 @@ class PlaybackSlider extends React.PureComponent {
         const durationInS = Math.floor(duration / 1000);
         const fullMinutes = Math.floor(durationInS / 60)
         const remainingSeconds = durationInS % 60;
-        return `${fullMinutes}:${remainingSeconds}`
+        return `${fullMinutes}:${remainingSeconds.toString().padStart(2, "0")}`
     }
 
 }

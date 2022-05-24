@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "makeDebugApk": "cd android && ./gradlew assembleRelease && cd .."
+    "makeDebugApk": "cd android && ./gradlew :app:assembleRelease && cd .."
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.1.0",
@@ -20,6 +20,7 @@
     "react-native-idle-timer": "^2.1.7",
     "react-native-safe-area-context": "^4.2.5",
     "react-native-screens": "^3.13.1",
+    "react-native-snackbar": "^2.4.0",
     "react-native-spotify-remote": "0.3.11-5",
     "react-native-ultimate-config": "^4.0.0",
     "react-native-vector-icons": "^9.1.0",
