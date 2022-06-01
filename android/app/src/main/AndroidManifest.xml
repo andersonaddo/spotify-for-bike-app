@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 <!-- https://community.spotify.com/t5/Spotify-for-Developers/Why-can-t-I-use-the-SDK-on-Android-OS-11/m-p/5062921/highlight/true#M1438 -->
+<!-- https://github.com/cjam/react-native-spotify-remote/issues/129 -->
     <queries>
       <package android:name="com.spotify.music" />
     </queries>
@@ -27,5 +28,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
+
 </manifest>

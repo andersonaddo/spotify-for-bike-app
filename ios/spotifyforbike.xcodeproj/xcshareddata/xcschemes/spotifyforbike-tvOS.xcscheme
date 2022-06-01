@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "spotifyforbike.app"
-               BlueprintName = "spotifyforbike"
+               BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+               BuildableName = "spotifyforbike-tvOS.app"
+               BlueprintName = "spotifyforbike-tvOS"
                ReferencedContainer = "container:spotifyforbike.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "spotifyforbikeTests.xctest"
-               BlueprintName = "spotifyforbikeTests"
+               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
+               BuildableName = "spotifyforbike-tvOSTests.xctest"
+               BlueprintName = "spotifyforbike-tvOSTests"
                ReferencedContainer = "container:spotifyforbike.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -54,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "spotifyforbike.app"
-            BlueprintName = "spotifyforbike"
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "spotifyforbike-tvOS.app"
+            BlueprintName = "spotifyforbike-tvOS"
             ReferencedContainer = "container:spotifyforbike.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "spotifyforbike.app"
-            BlueprintName = "spotifyforbike"
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "spotifyforbike-tvOS.app"
+            BlueprintName = "spotifyforbike-tvOS"
             ReferencedContainer = "container:spotifyforbike.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
