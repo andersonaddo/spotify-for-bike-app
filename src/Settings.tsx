@@ -40,14 +40,14 @@ export default class Settings extends React.PureComponent<SettingsNavProps> {
         <View style={styles.sleepButtonContainer}>
 
           <TouchableOpacity
-            onPress={() => IdleTimerManager.setIdleTimerDisabled(false)}
+            onPress={() => IdleTimerManager.setIdleTimerDisabled(true)}
             style={styles.sleepButtonDisable}
           >
             <Text style={styles.sleepButtonText}>Disable Screen Sleep</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => IdleTimerManager.setIdleTimerDisabled(true)}
+            onPress={() => IdleTimerManager.setIdleTimerDisabled(false)}
             style={styles.sleepButtonEnable}
           >
             <Text style={styles.sleepButtonText}>Enable Screen Sleep</Text>
