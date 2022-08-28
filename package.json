@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "env": "rnuc .env",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -17,6 +18,7 @@
     "@react-navigation/native-stack": "^6.6.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-device-info": "^10.0.2",
     "react-native-idle-timer": "^2.1.7",
     "react-native-safe-area-context": "3.4.0",
     "react-native-screens": "^3.13.1",
