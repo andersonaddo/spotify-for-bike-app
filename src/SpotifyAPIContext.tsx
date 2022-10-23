@@ -192,7 +192,9 @@ class SpotifyContextProvider extends React.Component<{}, ContextProviderState> {
                 const parsedError = JSON.parse(message)
                 const nestedMessage = parsedError?.message
                 if (nestedMessage) message = nestedMessage
-            }catch(err){}
+            }catch(err){
+                console.error(err)
+            }
             
             Snackbar.show({
                 text: message,

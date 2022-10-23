@@ -1,6 +1,6 @@
 import React from 'react';
 import SpotifyAPIContext from '../SpotifyAPIContext';
-import { Slider } from '@miblanchard/react-native-slider';
+import { Slider } from '@rneui/themed';
 import colors from '../utils/Colors';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -26,15 +26,19 @@ class PlaybackSlider extends React.PureComponent {
                     minimumValue={0}
                     maximumValue={track ? track.duration : 0}
                     value={playerState ? playerState.playbackPosition : 0}
-                    onSlidingComplete={(val: number | number[]) => {
-                        if (isActive && typeof val != "number") {
-                            this.context.remote.seek(Math.round(val[0]))
+                    onSlidingComplete={(val: number) => {
+                        if (isActive) {
+                            this.context.remote.seek(Math.round(val))
                                 .catch(err => this.context.onError(err as Error));
                         }
                     }}
-                    containerStyle={styles.sliderContainer}
+                    allowTouchTrack={false}
                     thumbStyle={styles.sliderThumb}
-                    trackStyle={styles.sliderTrack}
+                    orientation="horizontal"
+                    minimumTrackTintColor={colors.spotifySand}
+                    maximumTrackTintColor={colors.sliderMediumGrey}
+                    style={styles.sliderContainer}
+
                 />
 
                 <Text style={styles.sliderDurationText}>
@@ -57,6 +61,7 @@ class PlaybackSlider extends React.PureComponent {
 
 const styles = StyleSheet.create({
     containerStyle: {
+        marginHorizontal: 8,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center"
@@ -64,10 +69,8 @@ const styles = StyleSheet.create({
     sliderThumb: {
         width: 50,
         height: 50,
+        borderRadius: 10,
         backgroundColor: colors.spotifyGreen
-    },
-    sliderTrack: {
-        backgroundColor: colors.spotifySand
     },
     sliderContainer: {
         width: "80%",

@@ -26,7 +26,7 @@ class TimeDisplay extends React.PureComponent<{}, { time: string }> {
         const currentDate = new Date()
         const hours = currentDate.getHours()
         const minutes = currentDate.getMinutes()
-        this.setState({ time: `${hours}:${minutes}` })
+        this.setState({ time: `${hours}:${minutes.toString().padStart(2, "0")}` })
     }
 
     render(): React.ReactNode {
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     timeText: {
         marginHorizontal: 8,
         color: "lightgrey",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 24
     },
 });
 

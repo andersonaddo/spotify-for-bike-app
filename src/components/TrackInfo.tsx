@@ -80,6 +80,7 @@ class TrackInfo extends React.PureComponent<{}, TrackInfoState> {
 
 const styles = StyleSheet.create({
     albumCover: {
+        marginTop: 5,
         height: 155,
         width: 155,
         alignSelf: "center",
@@ -93,12 +94,14 @@ const styles = StyleSheet.create({
     trackTitle: {
         fontWeight: "bold",
         fontSize: 25,
-        color: colors.spotifySand
+        color: colors.spotifySand,
+        textAlign: "center"
     },
     trackArtist: {
         fontWeight: "bold",
         fontSize: 20,
-        color: colors.spotifySand
+        color: colors.spotifySand,
+        textAlign: "center"
     },
     trackSource: {
         fontSize: 20,

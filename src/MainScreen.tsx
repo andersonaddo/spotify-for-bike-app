@@ -13,8 +13,12 @@ import PlaybackSlider from './components/PlaybackSlider';
 import Snackbar from 'react-native-snackbar';
 import BatteryIcon from './components/BatteryStatusDisplayer';
 import TimeDisplay from './components/TimeDisplayer';
+import ScreenLockButton from './components/ScreenLockButton';
+import VolumeSlider from './components/VolumeSlider';
 
-
+//I'm making the pip window parent from here instead of the App.tsx so that React 
+//doesn't have to create the entre render stack (navigation stack, context, etc) when pip
+//mode changes
 class MainScreen extends React.PureComponent<MainScreenNavProps> {
 
   openSpotify = async () => {
@@ -35,26 +39,36 @@ class MainScreen extends React.PureComponent<MainScreenNavProps> {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Icon
-            name="spotify"
-            color={colors.spotifyGreen}
-            size={30}
-            style={styles.headerIcon}
-            onPress={this.openSpotify} />
-          <BatteryIcon />
-          <TimeDisplay />
-          <FeatherIcon
-            name="settings"
-            color={colors.spotifySand}
-            size={30}
-            onPress={() => this.props.navigation.navigate("Settings")}
-            style={styles.headerIcon} />
+
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ flex: 1, flexDirection: "column" }}>
+            <View style={styles.header}>
+              <View style={{...styles.headerElementWrapperBesideTime, justifyContent:"flex-start",}}>
+                <Icon
+                  name="spotify"
+                  color={colors.spotifyGreen}
+                  size={40}
+                  style={styles.headerIcon}
+                  onPress={this.openSpotify} />
+                <BatteryIcon />
+              </View>
+
+              <TimeDisplay />
+
+              <View style={{...styles.headerElementWrapperBesideTime, justifyContent:"flex-end"}}>
+                <ScreenLockButton />
+                <FeatherIcon
+                  name="settings"
+                  color={colors.spotifySand}
+                  size={30}
+                  onPress={() => this.props.navigation.navigate("Settings")}
+                  style={styles.headerIcon} />
+              </View>
+            </View>
+            <TrackInfo />
+          </View>
+          <VolumeSlider />
         </View>
-
-        <ConnectionBanner />
-
-        <TrackInfo />
 
         <PlaybackSlider />
 
@@ -64,6 +78,8 @@ class MainScreen extends React.PureComponent<MainScreenNavProps> {
         </View>
 
         <SkipForwardButton />
+
+        <ConnectionBanner />
 
       </View>
     )
@@ -76,18 +92,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     flex: 1
   },
+  headerElementWrapperBesideTime: {
+    marginHorizontal: 8,
+    flex: 1,
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "center"
+  },
   header: {
     flexDirection: "row",
-    height: 45,
+    height: 55,
     borderBottomColor: colors.spotifyGrey,
     borderBottomWidth: 1,
-    justifyContent: 'center',
+    justifyContent: "space-evenly",
     alignItems: 'center',
   },
 
   headerIcon: {
     marginHorizontal: 8,
-    marginTop: 8
   },
 
   secondaryButtonPanel: {

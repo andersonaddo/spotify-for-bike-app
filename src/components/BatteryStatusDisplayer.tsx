@@ -3,7 +3,7 @@ import {
     StyleSheet, Text, View
 } from 'react-native';
 import { getBatteryLevel } from 'react-native-device-info';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const refreshHz = 10; //in seconds
 
@@ -11,7 +11,7 @@ class BatteryIcon extends React.PureComponent<{}, { batteryStatus: string, batte
 
     intervalID: NodeJS.Timer | undefined = undefined;
 
-    state = { batteryStatus: "4", batteryColor: "green", batteryLevel: 100 }
+    state = { batteryStatus: "-40", batteryColor: "green", batteryLevel: 100 }
 
     componentDidMount() {
         this.updateBatteryStatus()
@@ -26,11 +26,18 @@ class BatteryIcon extends React.PureComponent<{}, { batteryStatus: string, batte
         try {
             const batteryLevel = await getBatteryLevel()
             this.setState({ batteryLevel: batteryLevel * 100 })
-            if (batteryLevel < 0.1) this.setState({ batteryStatus: "0", batteryColor: "red" })
-            else if (batteryLevel < 0.25) this.setState({ batteryStatus: "1", batteryColor: "orange" })
-            else if (batteryLevel < 0.5) this.setState({ batteryStatus: "2", batteryColor: "yellow" })
-            else if (batteryLevel < 0.75) this.setState({ batteryStatus: "3", batteryColor: "green" })
-            else this.setState({ batteryStatus: "4", batteryColor: "green" })
+            if (batteryLevel <= 0.1) this.setState({ batteryColor: "#FF0D0D" })
+            else if (batteryLevel <= 0.20) this.setState({ batteryColor: "#FF8E15" })
+            else if (batteryLevel <= 0.35) this.setState({ batteryColor: "#ffcc00" })
+            else if (batteryLevel <= 0.45) this.setState({ batteryColor: "#fbfd00" })
+            else if (batteryLevel <= 0.70) this.setState({ batteryColor: "#a5c90f" })
+            else this.setState({ batteryColor: "#2cba00" })
+
+            this.setState({
+                batteryStatus: batteryLevel >= 0.9
+                    ? ""
+                    : ("-" + Math.max(10, Math.round(batteryLevel * 10) * 10).toString())
+            })
 
         } catch (e) {
             console.error(e)
@@ -41,12 +48,12 @@ class BatteryIcon extends React.PureComponent<{}, { batteryStatus: string, batte
         return (
             <View style={styles.container}>
                 <Icon
-                    name={"battery-" + this.state.batteryStatus}
+                    name={"battery" + this.state.batteryStatus}
                     color={this.state.batteryColor}
-                    size={30}
+                    size={35}
                     style={styles.batteryIcon} />
                 <Text style={styles.text}>
-                    {Math.ceil(this.state.batteryLevel)}%
+                    {Math.round(this.state.batteryLevel)}%
                 </Text>
             </View>
 
@@ -62,10 +69,14 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "lightgrey",
-        textAlign: "center"
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 14
     },
     batteryIcon: {
-        marginHorizontal: 8
+        transform: [{ rotate: "90deg" }],
+        marginHorizontal: 4,
+        marginBottom: -4,
     },
 });
 

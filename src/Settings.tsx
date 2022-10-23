@@ -1,6 +1,5 @@
 import React from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import IdleTimerManager from 'react-native-idle-timer';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { SpotifyAPIContext } from './SpotifyAPIContext';
 import { SettingsNavProps } from './types/navigationTypes';
@@ -38,20 +37,6 @@ export default class Settings extends React.PureComponent<SettingsNavProps> {
         <AuthButton />
 
         <View style={styles.sleepButtonContainer}>
-
-          <TouchableOpacity
-            onPress={() => IdleTimerManager.setIdleTimerDisabled(true)}
-            style={styles.sleepButtonDisable}
-          >
-            <Text style={styles.sleepButtonText}>Disable Screen Sleep</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => IdleTimerManager.setIdleTimerDisabled(false)}
-            style={styles.sleepButtonEnable}
-          >
-            <Text style={styles.sleepButtonText}>Enable Screen Sleep</Text>
-          </TouchableOpacity>
 
         </View>
 
@@ -177,25 +162,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     flex: 1,
     alignItems: "center"
-  },
-
-  sleepButtonEnable: {
-    borderColor: colors.blue,
-    borderWidth: 5,
-    width: 140,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignContent: "center"
-  },
-
-  sleepButtonDisable: {
-    backgroundColor: colors.blue,
-    width: 140,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignContent: "center"
   },
 
   sleepButtonText: {

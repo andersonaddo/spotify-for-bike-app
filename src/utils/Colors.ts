@@ -7,7 +7,9 @@ const colors = {
 
     blue: "#3c6fd6",
     darkBlue: "#3c4bd6",
-    errorRed: "#db433b"
+    errorRed: "#db433b",
+
+    sliderMediumGrey: "#585858",
 }
 
 export default colors;
